@@ -1,6 +1,9 @@
 target
 .snfoundry_cache/
 
+#custom
+.tmp 
+dumps
 
 # Logs
 logs

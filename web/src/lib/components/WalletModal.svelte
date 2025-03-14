@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { disconnect } from "starknetkit"
-	import { walletStore } from "../stores/walletStore"
-	import { toasts } from "../stores/toastStore"
-	import CopyIcon from "../icons/CopyIcon.svelte"
-	import ExitIcon from "../icons/ExitIcon.svelte"
-	import { onDestroy, onMount } from "svelte"
+	import { disconnect } from 'starknetkit'
+	import { walletStore } from '../stores/walletStore'
+	import { toasts } from '../stores/toastStore'
+	import CopyIcon from '../icons/CopyIcon.svelte'
+	import ExitIcon from '../icons/ExitIcon.svelte'
+	import { onDestroy, onMount } from 'svelte'
 
 	type Props = {
 		showModal: boolean
@@ -20,13 +20,13 @@
 		}
 	}
 	onMount(() => {
-		if (typeof window !== "undefined") {
-			document.addEventListener("click", handleClickOutside)
+		if (typeof window !== 'undefined') {
+			document.addEventListener('click', handleClickOutside)
 		}
 	})
 	onDestroy(() => {
-		if (typeof window !== "undefined") {
-			document.removeEventListener("click", handleClickOutside)
+		if (typeof window !== 'undefined') {
+			document.removeEventListener('click', handleClickOutside)
 		}
 	})
 
@@ -34,18 +34,18 @@
 		await disconnect()
 		walletStore.clear()
 		onClose()
-		toasts.add({ message: "Wallet disconnected!" })
+		toasts.add({ message: 'Wallet disconnected!' })
 	}
 	const copyAddress = async () => {
 		if (!$walletStore) return
 		try {
 			await navigator.clipboard.writeText($walletStore.selectedAddress)
-			toasts.add({ message: "Address copied!" })
+			toasts.add({ message: 'Address copied!' })
 		} catch (error) {
-			console.error("Failed to copy address:", error)
+			console.error('Failed to copy address:', error)
 			toasts.add({
-				message: "Failed to copy address. Please check clipboard permissions.",
-				type: "error"
+				message: 'Failed to copy address. Please check clipboard permissions.',
+				type: 'error'
 			})
 		}
 	}
@@ -61,21 +61,38 @@
 	>
 		<div class="card" bind:this={element}>
 			<button class="close" onclick={onClose} aria-label="Close modal">⛌</button>
-
+			<div class="network">
+				<h3><code>Network</code></h3>
+				<div>
+					<p class="title"><code>ChainId</code></p>
+					<p class="data">
+						{$walletStore.chainId} -
+						{$walletStore.provider?.provider?.chainId ?? 'Not available'}
+					</p>
+				</div>
+				<div>
+					<p class="title"><code>NodeUrl</code></p>
+					<p class="data">
+						{$walletStore.provider?.provider?.nodeUrl ?? 'Not available'}
+					</p>
+				</div>
+			</div>
+			<hr />
+			<h3><code>Account</code></h3>
 			<div class="logo">
 				{#if $walletStore.icon}
 					<img src={$walletStore.icon} alt="Wallet icon" width="48" />
 				{/if}
 			</div>
 
-			<h3>
+			<p>
 				<code
 					>{$walletStore.selectedAddress.slice(0, 5)}...{$walletStore.selectedAddress.slice(
 						60,
 						66
 					)}</code
 				>
-			</h3>
+			</p>
 			<div class="actions">
 				<button class="action-btn" onclick={copyAddress}>
 					<CopyIcon />
@@ -125,7 +142,7 @@
 	.close {
 		position: absolute;
 		top: 0;
-		right: 4px;
+		right: 5px;
 		padding: 0.5rem;
 		background: none;
 		border-radius: 50%;
@@ -135,13 +152,31 @@
 	.close:hover {
 		transform: scale(1.1);
 	}
+	.network {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 1rem;
+
+		.title {
+			font-size: small;
+			margin-bottom: 0.2rem;
+			font-weight: bold;
+			/* opacity: 0.8; */
+		}
+		.data {
+			font-size: small;
+			/* font-weight: bold; */
+			opacity: 1;
+		}
+	}
 	.logo {
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
-		padding: 16px 0 0 0;
 	}
 	.actions {
 		display: flex;
@@ -163,5 +198,9 @@
 	.action-btn:hover {
 		background-color: rgb(251, 251, 251);
 		box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+	}
+	hr {
+		opacity: 0.3;
+		margin: 1rem;
 	}
 </style>

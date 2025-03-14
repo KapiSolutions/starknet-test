@@ -72,7 +72,7 @@
 		loading = true
 		try {
 			const { wallet: walletX } = await connect({
-				dappName: 'Privacy Pools Web',
+				dappName: 'Starknet_test',
 				modalMode: 'alwaysAsk',
 				modalTheme: 'light',
 				webWalletUrl: 'https://web.argent.xyz'

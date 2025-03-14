@@ -1,14 +1,15 @@
 <script lang="ts">
-	import type { Snippet } from "svelte"
+	import type { Snippet } from 'svelte'
 
 	type Props = {
 		children: Snippet
+		width?: string
 	}
 
-	let { children }: Props = $props()
+	let { children, width = 'auto' }: Props = $props()
 </script>
 
-<div class="card">{@render children()}</div>
+<div class="card" style:width>{@render children()}</div>
 
 <style>
 	.card {

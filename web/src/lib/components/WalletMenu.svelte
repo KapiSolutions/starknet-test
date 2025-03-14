@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { StarknetKitWallet } from "../types/starknetkit"
-	import WalletModal from "./WalletModal.svelte"
+	import type { StarknetKitWallet } from '../types/starknetkit'
+	import WalletModal from './WalletModal.svelte'
 
 	type Props = {
 		wallet: StarknetKitWallet
@@ -28,7 +28,7 @@
 		background: var(--bg-dimmed);
 		border: none;
 		color: inherit;
-		border-radius: var(--radius-sm);
+		border-radius: var(--radius);
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		padding: 1rem;
 		display: flex;

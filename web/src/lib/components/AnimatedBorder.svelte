@@ -16,7 +16,7 @@
 		style:animation-duration="{duration}s"
 		style:background="conic-gradient(var(--bg) 50%, var(--bg) 50%, {color} 100%)"
 	></span>
-	<span class="content">{@render children()} </span>
+	<span class="content" style:border-radius={radius}>{@render children()} </span>
 </div>
 
 <style>
@@ -41,7 +41,6 @@
 			width: 100%;
 			align-items: center;
 			justify-content: center;
-			border-radius: 0.75rem;
 			background-color: var(--bg);
 		}
 	}

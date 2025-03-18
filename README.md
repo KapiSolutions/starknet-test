@@ -2,7 +2,7 @@
 <img width="1009" alt="Screenshot 2025-03-17 at 18 38 18" src="https://github.com/user-attachments/assets/24ddc9d1-bd93-48f3-8a55-e265d962fcaa" />
 
 The repository consists of two parts:
-- <b>[SmartContract]</b> Counter contract written and tested in Cairo, build with Scarb and deployed with StarknetFoundry,
+- <b>[SmartContract]</b> Counter contract written in Cairo, builded with Scarb, tested and deployed using StarknetFoundry,
 - <b>[Dapp]</b> Svelte5 frontend with StarknetKit for wallet integration and Counter contract interaction.
 
 ---
